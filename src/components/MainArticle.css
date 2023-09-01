@@ -1,0 +1,8 @@
+.row{
+    display: flex;
+    flex-direction: column;
+}
+
+.posters{display: flex;
+    flex-direction: column;
+}
