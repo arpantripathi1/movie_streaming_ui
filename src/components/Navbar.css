@@ -4,16 +4,25 @@
     justify-content:space-between;
     align-items: center;
     margin: 0 20px;
+   
 }
 
 .logo-text {
     max-width: 67px;
     font-weight: 500;
+    font-size: 1.5rem;
     color:rgb(70, 70, 70);
     padding:5px;
+   
 }
 
 
 input{
     background-color: rgb(199, 198, 198);
+    padding:0.3rem;
+}
+
+.search-logo{
+    width: 2em;
+        height: 25px;
 }

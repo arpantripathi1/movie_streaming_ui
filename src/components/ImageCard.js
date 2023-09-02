@@ -1,21 +1,19 @@
 import React from 'react'
 import "./ImageCard.css"
-const ImageCard = ({ item }) => {
+
+const ImageCard = ({item}) => {
   return (
-    <div className="container">
-      <div className="image_container">
-        <img className="img" src={item.backdrop} alt={item.title} />
-      </div>
-      <h4>{item.title}</h4>
-      <div className="about">
-        <h5>IMDB : {item.imbd_rating}/10</h5>
-        <h5>{item.length}</h5>
-        <div className='description'>
-            <p>{item.overview}</p>
+    <div className="card">
+      <img className="card_img" src={item.poster} alt="movie_poster"/>
+      <div className="card_overlay">
+        <div className='card_title' >{item ? item.title : "" }</div>
+        <div className='card_runtime'>
+          {item?item.released_on:""}
+          <span className='card_rating'>{item?item.imdb_rating:""}/10</span>
         </div>
+        <div className='card_description'>{item?item.overview:""}</div>
       </div>
     </div>
   );
-};
-
-export default ImageCard
+}
+export default ImageCard;

@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className='navbar'>
         <div className='logo-text'>WOOKIE MOOVIES</div>
         <div>
-          <AiOutlineSearch />
+          <AiOutlineSearch className='search-logo'/>
             <input type='search' value={search} onChange={(e)=>setSearch(e.target.value)}/>
         </div>
     </div>

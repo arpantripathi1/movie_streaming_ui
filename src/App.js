@@ -1,51 +1,41 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import React, { useEffect, useState } from "react";
+import { useContext } from 'react';
 import './App.css';
 import Header from './components/Header';
-import MainArticle from "./components/MainArticle";
+import Movies from './components/Movies';
+import { AppContext } from './context/AppContext';
+
 
 function App() {
-  // const [apiData , setApiData] =useState();
-  const [apiData, setApiData] = useState({
-    items: [],
-    isLoaded: false,
-    isError: false,
-  });
+  const apiData = useContext(AppContext) ;
 
-  useEffect(()=>{
+   const groupMoviesByGenre = () => {
+     const groupedMovies = {};
+     apiData.items.forEach((movie) => {
+       movie.genres.forEach((genre) => {
+         if (!groupedMovies[genre]) {
+           groupedMovies[genre] = [];
+         }
+         groupedMovies[genre].push(movie);
+       });
+     });
+     return groupedMovies;
+   };
 
-   function getData(api, token) {
-      axios
-        .get(api, { headers: { Authorization: `Bearer ${token}` } })
-        .then((res) => {
-          setApiData({ ...apiData, items: res.data.movies});
-          console.log("res ; ",res);
-          console.log(apiData.items);
-          // console.log(data.items);
-          return apiData.items;
-          // console.log(res.data.movies[0].genres);
-          // this.setState({
-          // items: res.data,  /*set response data in items array*/
-          // isLoaded : true,
-          // redirectToReferrer: false
-        });
-    }
+   // Get the grouped movies by genre
+   const groupedMovies = groupMoviesByGenre();
+   console.log("groiuped moves", groupedMovies);
 
-
-    const api = `https://wookie.codesubmit.io/movies`;
-    let token = `Wookie2019`;
-    getData(api , token);
-   
-  },[]);
-
-
+ 
   return (
-    <div className="App">
+    <div>
       <Header />
       <hr />
-      <MainArticle movieItems={apiData.items} />
+      <Movies groupedMovies={groupedMovies} isLoading = {apiData.isLoading}/>
     </div>
   );
+
+
 }
 
 export default App;
